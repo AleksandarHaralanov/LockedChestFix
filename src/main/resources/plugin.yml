@@ -1,0 +1,6 @@
+main: io.github.aleksandarharalanov.lockedchestfix.LockedChestFix
+version: 1.0.0
+name: LockedChestFix
+author: Beezle
+website: github.com/AleksandarHaralanov/LockedChestFix
+description: Prevents locked chest blocks from decaying.
