@@ -9,7 +9,7 @@ import static io.github.aleksandarharalanov.lockedchestfix.util.UpdateUtil.check
 
 public class LockedChestFix extends JavaPlugin {
     public void onEnable() {
-        checkForUpdates(this, "https://api.github.com/repos/AleksandarHaralanov/Hats/releases/latest");
+        checkForUpdates(this, "https://api.github.com/repos/AleksandarHaralanov/LockedChestFix/releases/latest");
 
         try {
             Block.byId[Block.LOCKED_CHEST.id] = null;
