@@ -1,6 +1,7 @@
 # LockedChestFix
 ## What's LockedChestFix?
-<p><img align="middle" width="80" src="assets/LockedChestFix.png" alt="LockedChestFix"><b>LockedChestFix</b> is a Minecraft plugin designed for servers running version b1.7.3. It prevents the Locked Chest block from decaying, ensuring it won't disappear a few seconds after being placed.</p>
+<p><img align="middle" width="80" src="assets/LockedChestFix.png" alt="LockedChestFix"><b>LockedChestFix</b> is a Minecraft plugin designed for servers running version b1.7.3.</p>
+It prevents the Locked Chest block from decaying, ensuring it won't disappear a few seconds after being placed.
 
 ---
 ### Download
