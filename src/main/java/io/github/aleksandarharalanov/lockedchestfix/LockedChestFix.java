@@ -17,7 +17,7 @@ public class LockedChestFix extends JavaPlugin {
             Block.byId[Block.LOCKED_CHEST.id] = custom;
         } catch (Exception e) {
             Block.byId[Block.LOCKED_CHEST.id] = Block.LOCKED_CHEST;
-            logSevere(String.format("[%s] Could not register custom block class: %s", getDescription().getName(), e.getMessage()));
+            logSevere(String.format("[%s] Could not register custom block class: %s", getDescription().getName(), e));
         }
 
         logInfo(String.format("[%s] v%s Enabled.", getDescription().getName(), getDescription().getVersion()));
