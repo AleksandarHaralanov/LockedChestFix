@@ -4,11 +4,11 @@ It prevents the Locked Chest block from decaying, ensuring it won't disappear a 
 
 ---
 ## Contributing Code & Reporting Issues
-Consider helping ChatGuard become even more versatile and robust.
+Consider helping LockedChestFix become even more versatile and robust.
 
 Visit the [CONTRIBUTING](https://github.com/AleksandarHaralanov/LockedChestFix/blob/master/.github/CONTRIBUTING.md) guide for details on how to get started and where to focus your efforts.
 
-For any issues with the plugin, or suggestions, please report them [here](https://github.com/AleksandarHaralanov/ChatGuard/issues).
+For any issues with the plugin, or suggestions, please report them [here](https://github.com/AleksandarHaralanov/LockedChestFix/issues).
 
 ---
 ## Download
