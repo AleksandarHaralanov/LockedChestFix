@@ -1,7 +1,6 @@
-# LockedChestFix
-<p><img align="middle" width="100" src="assets/LockedChestFix.png" alt="LockedChestFix"><b>LockedChestFix</b> is a Minecraft plugin designed for servers running version b1.7.3.</p>
+<h1><img align="top" width="40" src="assets/LockedChestFix.png" alt="LockedChestFix"/> LockedChestFix</h1>
+**Lightweight plugin designed for Minecraft Beta 1.7.3**<br/>
 It prevents the Locked Chest block from decaying, ensuring it won't disappear a few seconds after being placed.
-<br/>
 
 ![Software](https://img.shields.io/badge/build-craftbukkit1060-purple)
 ![Version](https://img.shields.io/github/v/release/alx-mp4/LockedChestFix?display_name=tag&sort=semver)
