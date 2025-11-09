@@ -1,5 +1,5 @@
 <h1><img align="top" width="40" src="assets/LockedChestFix.png" alt="LockedChestFix"/> LockedChestFix</h1>
-**Lightweight plugin designed for Minecraft Beta 1.7.3**<br/>
+<b>Lightweight plugin designed for Minecraft Beta 1.7.3</b><br/>
 It prevents the Locked Chest block from decaying, ensuring it won't disappear a few seconds after being placed.
 
 ![Software](https://img.shields.io/badge/build-craftbukkit1060-purple)
