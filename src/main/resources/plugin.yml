@@ -1,6 +1,6 @@
-main: io.github.aleksandarharalanov.lockedchestfix.LockedChestFix
-version: 1.0.0
+main: io.github.alx_mp4.lockedchestfix.LockedChestFix
+version: 1.0.1
 name: LockedChestFix
 author: Beezle
-website: github.com/AleksandarHaralanov/LockedChestFix
+website: github.com/alx-mp4/LockedChestFix
 description: Prevents locked chest blocks from decaying.

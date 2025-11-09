@@ -1,7 +1,11 @@
-import java.util.regex.Matcher
-
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
@@ -9,47 +13,36 @@ repositories {
 }
 
 dependencies {
-    implementation files("libs/craftbukkit-1060.jar")
+    compileOnly files("libs/craftbukkit-1060.jar")
 }
 
-File ymlFile = file('src/main/resources/plugin.yml') as File
+def yml = file('src/main/resources/plugin.yml').text
+def m = (yml =~ /(?m)^\s*version:\s*["']?([^"'#\s]+)["']?/)
+if (m.find()) version = m.group(1)
+group = 'io.github.alx_mp4'
 
-if (!ymlFile.exists()) {
-    throw new GradleException("The 'plugin.yml' file does not exist in 'src/main/resources'!")
+tasks.shadowJar {
+    archiveClassifier.set('')
+    mergeServiceFiles()
 }
 
-String pluginVersion
-String pluginName
-String ymlText = ymlFile.text
+tasks.build { dependsOn tasks.shadowJar }
 
-Matcher mainMatcher = (ymlText =~ /main:\s*(\S+)/)
-Matcher versionMatcher = (ymlText =~ /version:\s*(\S+)/)
-Matcher nameMatcher = (ymlText =~ /name:\s*(\S+)/)
-
-if (!mainMatcher.find()) {
-    throw new GradleException("The 'main' attribute wasn't found in the 'plugin.yml' file!")
+tasks.register('cleanShadowJar') {
+    group = 'shadow'
+    dependsOn 'clean', 'shadowJar'
 }
 
-if (versionMatcher.find()) {
-    pluginVersion = versionMatcher.group(1)
-} else {
-    throw new GradleException("The 'version' attribute wasn't found in the 'plugin.yml' file!")
+def pluginsPath = 'D:/Beta/CB1060/plugins/'
+
+tasks.register("deletePluginJar", Delete) {
+    group = 'shadow'
+    delete(files(pluginsPath + "${project.name}-${project.version}.jar"))
 }
 
-if (nameMatcher.find()) {
-    pluginName = nameMatcher.group(1)
-} else {
-    throw new GradleException("The 'name' attribute wasn't found in the 'plugin.yml' file!")
-}
-
-jar {
-    manifest {
-        attributes(
-                'Implementation-Title': pluginName,
-                'Implementation-Version': pluginVersion
-        )
-    }
-
-    archiveVersion.set(pluginVersion)
-    archiveBaseName.set(pluginName)
+tasks.register('replacePluginJar', Copy) {
+    group = 'shadow'
+    from 'build/libs'
+    into pluginsPath
+    dependsOn 'clean', 'shadowJar', 'deletePluginJar'
 }

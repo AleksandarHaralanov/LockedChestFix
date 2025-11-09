@@ -2,21 +2,25 @@
 <p><img align="middle" width="100" src="assets/LockedChestFix.png" alt="LockedChestFix"><b>LockedChestFix</b> is a Minecraft plugin designed for servers running version b1.7.3.</p>
 It prevents the Locked Chest block from decaying, ensuring it won't disappear a few seconds after being placed.
 
----
-## Contributing Code & Reporting Issues
-Consider helping LockedChestFix become even more versatile and robust.
-
-Visit the [CONTRIBUTING](https://github.com/AleksandarHaralanov/LockedChestFix/blob/master/.github/CONTRIBUTING.md) guide for details on how to get started and where to focus your efforts.
-
-For any issues with the plugin, or suggestions, please report them [here](https://github.com/AleksandarHaralanov/LockedChestFix/issues).
+![Software](https://img.shields.io/badge/build-craftbukkit1060-purple)
+![Version](https://img.shields.io/github/v/release/alx-mp4/LockedChestFix?display_name=tag&sort=semver)
+![Downloads](https://img.shields.io/github/downloads/alx-mp4/LockedChestFix/total?color=green)
+![License](https://img.shields.io/github/license/alx-mp4/LockedChestFix)
 
 ---
-## Download
-Latest releases of **LockedChestFix** can be found here on [GitHub](https://github.com/AleksandarHaralanov/LockedChestFix/releases).<br>
+## 🤝 Contributing
+Contributions, issues, and suggestions are welcome.  
+Refer to [CONTRIBUTING](https://github.com/alx-mp4/LockedChestFix?tab=contributing-ov-file) before opening pull requests.
 
-The plugin is fully open-source and transparent.<br>
-If you'd like additional peace of mind, you're welcome to scan the `.jar` file using [VirusTotal](https://www.virustotal.com/gui/home/upload).
+To report bugs or request features, use the [GitHub Issues page](https://github.com/alx-mp4/LockedChestFix/issues).
 
 ---
-## Requirements
-Your b1.7.3 server must be running one of the following APIs: CB1060-CB1092, [Project Poseidon](https://github.com/retromcorg/Project-Poseidon) or [UberBukkit](https://github.com/Moresteck/Project-Poseidon-Uberbukkit).
+## ⬇️ Download
+The latest release is available on the [Releases page](https://github.com/alx-mp4/LockedChestFix/releases/latest).  
+For extra assurance, you can verify the `.jar` file using [VirusTotal](https://www.virustotal.com/gui/home/upload).
+
+---
+**LockedChestFix** is built against [CraftBukkit 1060](https://github.com/alx-mp4/LockedChestFix/raw/refs/heads/master/libs/craftbukkit-1060.jar). It is expected to work on the server software listed below (forks of CB1060), assuming their current stable releases have not modified the APIs or behaviors used for the plugin.
+
+- [Project Poseidon](https://github.com/retromcorg/Project-Poseidon)
+- [UberBukkit](https://github.com/Moresteck/Project-Poseidon-Uberbukkit)

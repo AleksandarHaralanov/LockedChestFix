@@ -1,5 +1,6 @@
-package io.github.aleksandarharalanov.lockedchestfix.util;
+package io.github.alx_mp4.lockedchestfix.util.log;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,25 +13,29 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
-import static org.bukkit.Bukkit.getServer;
-
 /**
  * Utility class for checking and comparing plugin versions with the latest release on GitHub.
  * <p>
- * This class queries the GitHub API for the latest release version and compares it with the current plugin version.
- * It logs messages indicating whether an update is available or if the plugin is up to date.
+ * Provides a method to query the GitHub API for the latest release version and compares it with the current plugin version.
+ * It logs messages to the console indicating whether an update is available or if the plugin is up to date.
+ *
+ * @see <a href="https://github.com/alx-mp4">Aleks' GitHub</a>
+ *
+ * @author Aleks (@alx-mp4)
  */
-public class UpdateUtil {
+public final class UpdateUtil {
 
-    private static final Logger logger = getServer().getLogger();
+    private static final Logger logger = Bukkit.getServer().getLogger();
+
+    private UpdateUtil() {}
 
     /**
-     * Checks for updates by querying a given GitHub API URL and comparing the current version with the latest
-     * available version.
+     * Checks for updates by querying a given GitHub API URL and comparing the current version with the latest available
+     * version.
      * <p>
-     * This method formats the current version by appending {@code v} to the front of it, as this is the convention
-     * used in GitHub release tags. It then compares the formatted version with the latest version retrieved from
-     * the GitHub API. If an update is available, it logs information about the new version and a download link.
+     * This method formats the current version by appending {@code v} to the front of it, as this is the convention used
+     * in GitHub release tags. It then compares the formatted version with the latest version retrieved from the GitHub
+     * API. If an update is available, it logs information about the new version and a download link.
      * <p>
      * <b>Warning:</b> This method only works with GitHub repositories. Ensure that the GitHub API URL points to
      * the latest release information of your repository.
@@ -39,7 +44,7 @@ public class UpdateUtil {
      * @param githubApiUrl  the GitHub API URL to query for the latest release information; should be in the format
      *                      {@code https://api.github.com/repos/USER/REPO/releases/latest}
      */
-    public static void checkForUpdates(JavaPlugin plugin, String githubApiUrl) {
+    public static void checkAvailablePluginUpdates(JavaPlugin plugin, String githubApiUrl) {
         PluginDescriptionFile pdf = plugin.getDescription();
         HttpURLConnection connection = null;
         try {
@@ -57,7 +62,9 @@ public class UpdateUtil {
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder content = new StringBuilder();
             String inputLine;
-            while ((inputLine = in.readLine()) != null) content.append(inputLine);
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
             in.close();
 
             String responseBody = content.toString();
@@ -65,9 +72,14 @@ public class UpdateUtil {
             String formattedCurrentVersion = "v" + pdf.getVersion();
             compareVersions(pdf.getName(), formattedCurrentVersion, latestVersion, githubApiUrl);
         } catch (IOException | URISyntaxException e) {
-            logger.severe(String.format("[%s] Exception occurred while checking for a new version: %s", pdf.getName(), e.getMessage()));
+            logger.severe(String.format(
+                    "[%s] Exception occurred while checking for a new version: %s",
+                    pdf.getName(), e.getMessage()
+            ));
         } finally {
-            if (connection != null) connection.disconnect();
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
     }
 
@@ -80,11 +92,17 @@ public class UpdateUtil {
      * @param responseCode the HTTP response code received from the GitHub API
      */
     private static void handleResponseError(String pluginName, int responseCode) {
-        if (responseCode == 403 || responseCode == 429)
-            logger.warning(String.format("[%s] Rate limited, can't check for a new plugin version. This should resolve itself within an hour.", pluginName));
-        else
-            logger.warning(String.format("[%s] Unexpected response code: %s. Unable to check for a new plugin version.", pluginName, responseCode));
-
+        if (responseCode == 403 || responseCode == 429) {
+            logger.warning(String.format(
+                    "[%s] Rate limited, can't check for a new plugin version. This should resolve itself within an hour.",
+                    pluginName
+            ));
+        } else {
+            logger.warning(String.format(
+                    "[%s] Unexpected response code: %s. Unable to check for a new plugin version.",
+                    pluginName, responseCode
+            ));
+        }
     }
 
     /**
@@ -94,16 +112,21 @@ public class UpdateUtil {
      * string. If the version cannot be found, it returns {@code null}.
      *
      * @param responseBody the JSON response from the GitHub API
+     *
      * @return the latest version string, or {@code null} if it cannot be determined
      */
     private static String getLatestVersion(String responseBody) {
         String tagNameField = "\"tag_name\":\"";
         int tagIndex = responseBody.indexOf(tagNameField);
-        if (tagIndex == -1) return null;
+        if (tagIndex == -1) {
+            return null;
+        }
 
         int startIndex = tagIndex + tagNameField.length();
         int endIndex = responseBody.indexOf("\"", startIndex);
-        if (endIndex == -1) return null;
+        if (endIndex == -1) {
+            return null;
+        }
 
         return responseBody.substring(startIndex, endIndex);
     }
@@ -127,8 +150,16 @@ public class UpdateUtil {
 
         if (!pluginVersion.equalsIgnoreCase(latestVersion)) {
             String downloadLink = githubApiUrl.replace("api.github.com/repos", "github.com");
-            logger.info(String.format("[%s] New stable %s available. You are running an outdated or experimental %s.", pluginName, latestVersion, pluginVersion));
-            logger.info(String.format("[%s] Download the latest stable version from: %s", pluginName, downloadLink));
-        } else logger.info(String.format("[%s] You are running the latest version.", pluginName));
+            logger.info(String.format(
+                    "[%s] New stable %s available. You are running an outdated or experimental %s.",
+                    pluginName, latestVersion, pluginVersion
+            ));
+            logger.info(String.format(
+                    "[%s] Download the latest stable version from: %s",
+                    pluginName, downloadLink
+            ));
+        } else {
+            logger.info(String.format("[%s] You are running the latest version.", pluginName));
+        }
     }
 }
